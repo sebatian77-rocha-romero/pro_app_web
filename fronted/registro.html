@@ -42,7 +42,7 @@
             const successMsg = document.getElementById('successMessage');
             
             async function hacerRegistro() {
-                // Limpiar mensajes anteriores
+                //limpia mensajes anteriores
                 errorMsg.textContent = '';
                 successMsg.textContent = '';
                 
@@ -51,7 +51,7 @@
                 const password = passwordInput.value;
                 const confirm = confirmInput.value;
                 
-                // Validaciones
+                //Validaciones
                 if (!nombre || !email || !password || !confirm) {
                     errorMsg.textContent = 'Por favor, completa todos los campos';
                     return;
@@ -84,7 +84,7 @@
                     console.log('Respuesta status:', res.status);
                     
                     if (res.ok) {
-                        successMsg.textContent = '✅ Cuenta creada exitosamente. Redirigiendo al login...';
+                        successMsg.textContent = 'Cuenta creada exitosamente. Redirigiendo al login...';
                         
                         // Limpiar formulario
                         nombreInput.value = '';
