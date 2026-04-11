@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Registro - Sistema de Inventario</title>
+    <link rel='stylesheet' href='./css/estilos1.css'>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Crear una Cuenta</h1>
+        
+        <div class="container">
+            <img src="./css/log.png" alt="logo">
+            
+            <input class="input3" type="text" id="nombre" placeholder="Nombre completo">
+            <input class="input3" type="email" id="email" placeholder="Correo electrónico">
+            <input class="input3" type="password" id="password" placeholder="Contraseña (mínimo 6 caracteres)">
+            <input class="input3" type="password" id="confirmPassword" placeholder="Confirmar contraseña">
+            
+            <button id="registerBtn">Registrarse</button>
+            
+            <p id="errorMessage" class="error"></p>
+            <p id="successMessage" class="success"></p>
+            
+            <div class="link-registro">
+                ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const registerBtn = document.getElementById('registerBtn');
+            const nombreInput = document.getElementById('nombre');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmInput = document.getElementById('confirmPassword');
+            const errorMsg = document.getElementById('errorMessage');
+            const successMsg = document.getElementById('successMessage');
+            
+            async function hacerRegistro() {
+                // Limpiar mensajes anteriores
+                errorMsg.textContent = '';
+                successMsg.textContent = '';
+                
+                const nombre = nombreInput.value.trim();
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                const confirm = confirmInput.value;
+                
+                // Validaciones
+                if (!nombre || !email || !password || !confirm) {
+                    errorMsg.textContent = 'Por favor, completa todos los campos';
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    errorMsg.textContent = 'La contraseña debe tener al menos 6 caracteres';
+                    return;
+                }
+                
+                if (password !== confirm) {
+                    errorMsg.textContent = 'Las contraseñas no coinciden';
+                    return;
+                }
+                
+                const originalText = registerBtn.textContent;
+                registerBtn.textContent = 'Registrando...';
+                registerBtn.disabled = true;
+                
+                try {
+                    console.log('Enviando registro a:', `${API_URL}/usuarios`);
+                    
+                    const res = await fetch(`${API_URL}/usuarios`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ nombre, email, password }),
+                        credentials: 'include'
+                    });
+                    
+                    console.log('Respuesta status:', res.status);
+                    
+                    if (res.ok) {
+                        successMsg.textContent = '✅ Cuenta creada exitosamente. Redirigiendo al login...';
+                        
+                        // Limpiar formulario
+                        nombreInput.value = '';
+                        emailInput.value = '';
+                        passwordInput.value = '';
+                        confirmInput.value = '';
+                        
+                        // Redirigir al login después de 2 segundos
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 2000);
+                    } else {
+                        const error = await res.text();
+                        errorMsg.textContent = error || 'Error al crear la cuenta';
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    errorMsg.textContent = 'Error de conexión con el servidor';
+                } finally {
+                    registerBtn.textContent = originalText;
+                    registerBtn.disabled = false;
+                }
+            }
+            
+            registerBtn.addEventListener('click', hacerRegistro);
+            
+            // Permitir enviar con Enter
+            const inputs = [nombreInput, emailInput, passwordInput, confirmInput];
+            inputs.forEach(input => {
+                if (input) {
+                    input.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            hacerRegistro();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

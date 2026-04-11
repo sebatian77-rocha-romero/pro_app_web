@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Page Title</title>
+    <link rel='stylesheet' href='./css/estilos1.css'>
+</head>
+<body class="body_index">
+    <button class = "burguer" id = "burguer">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+        <!-- menu burguer--> 
+    <nav class="nav-menu" id="nav-menu">
+        <ul>
+            <li><a href="index.html" class="active">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="perfil.html">Mi Perfil</a></li>
+            <li><a href="#" id="logoutLink">Cerrar sesión</a></li>
+            
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container-index">
+        
+        <!-- Banner de bienvenida -->
+        <div class="welcome-banner">
+            <h1>Bienvenido, <span id="nombreUsuario">Usuario</span> </h1>
+            <p>Gestiona tu inventario de manera fácil y rápida</p>
+        </div>
+
+        <!-- tarjetas de acceso rápido aa productos, categorias y usuario-->
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon"><img src="./css/stock.png" alt="productos"></div>
+                <h3>Productos</h3>
+                <p>Administrar inventario de productos</p>
+                <a href="productos.html" class="btn btn-primary">Ver productos →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><img src="./css/categoria.png" alt="categorias"></div>
+                <h3>Categorías</h3>
+                <p>Clasificar productos por categorías</p>
+                <a href="categorias.html" class="btn btn-primary">Ver categorías →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><img src="./css/usuario.png" alt="usuario"></div>
+                <h3>Mi Perfil</h3>
+                <p>Tu información personal</p>
+                <a href="perfil.html" class="btn btn-primary">Ver perfil →</a>
+            </div>
+        </div>
+
+        <!-- estadísticas -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Estadísticas del Inventario</h2>
+                <button id="actualizarStatsBtn" class="btn-refresh">Actualizar</button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-info">
+                        <h4>Total Productos</h4>
+                        <p class="stat-number" id="totalProductos">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <h4>Valor del Inventario</h4>
+                        <p class="stat-number" id="valorInventario">$0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-info">
+                        <h4>Productos con Stock Bajo</h4>
+                        <p class="stat-number warning" id="stockBajo">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📂</div>
+                    <div class="stat-info">
+                        <h4>Categorías</h4>
+                        <p class="stat-number" id="totalCategorias">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de productos con stock bajo -->
+        <div class="alert-section">
+            <h2>⚠️ Productos con Stock Bajo</h2>
+            <div class="alert-list" id="stockBajoList">
+                <p>Cargando...</p>
+            </div>
+        </div>
+
+        <!-- Sección de últimos productos agregados -->
+        <div class="recent-section">
+            <h2>🆕 Últimos Productos Agregados</h2>
+            <div class="recent-list" id="recentProducts">
+                <p>Cargando...</p>
+            </div>
+        </div>
+
+    </main>
+
+
+    <!-- RUTA AL JS -->
+    <script src="./javascripts/utils.js"></script>
+    <script src="./javascripts/index.js"></script>
+</body>
+</html>

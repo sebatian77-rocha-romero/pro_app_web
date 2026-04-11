@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Categorías - Sistema de Inventario</title>
+    <link rel='stylesheet' href='./css/estilos1.css'>
+</head>
+<body class="body_c">
+
+    <!-- Botón hamburguesa -->
+    <button class="burguer" id="burguer">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Menú de navegación -->
+    <nav class="nav-menu" id="nav-menu">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="categorias.html" class="active">Categorías</a></li>
+            <li><a href="perfil.html">Mi Perfil</a></li>
+            <li><a href="#" id="logoutLink">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container-c">
+        <h2>Gestión de Categorías</h2>
+
+        <!-- Formulario para crear/editar categoría -->
+        <div class="form-container">
+            <h3 id="formTitle">Agregar Categoría</h3>
+            <form id="categoriaForm">
+                <input type="hidden" id="categoriaId">
+                <div class="form-group">
+                    <label>Nombre de la categoría:</label>
+                    <input type="text" id="nombre" placeholder="Ej: Electrónica, Ropa, Alimentos" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción (opcional):</label>
+                    <textarea id="descripcion" rows="3" placeholder="Descripción de la categoría"></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" id="submitBtn">Crear Categoría</button>
+                    <button type="button" id="cancelBtn" class="btn-secondary" style="display:none">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tabla de categorías -->
+        <div class="tabla-container">
+            <h3>Lista de Categorías</h3>
+            <table id="categoriasTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Productos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="categoriasBody">
+                    <tr><td colspan="4">Cargando categorías...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- RUTA AL JS -->
+    <script src="./javascripts/utils.js"></script>
+    <script src="./javascripts/categorias.js"></script>
+
+</body>
+</html>

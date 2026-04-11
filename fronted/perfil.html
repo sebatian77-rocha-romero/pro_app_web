@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Mi Perfil - Sistema de Inventario</title>
+    <link rel='stylesheet' href='./css/estilos1.css'>
+</head>
+<body class="body_c">
+
+    <!-- Botón hamburguesa -->
+    <button class="burguer" id="burguer">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- menu de navegación -->
+    <nav class="nav-menu" id="nav-menu">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="categorias.html">Categorías</a></li>
+            <li><a href="perfil.html" class="active">Mi Perfil</a></li>
+            <li><a href="#" id="logoutLink">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container-c">
+        <h2>Mi Perfil</h2>
+
+        <div class="cont">
+            <!-- Tarjeta de información -->
+            <div class="form-group">
+                <div class="perfil-avatar">
+                    <div class="avatar">👤</div>
+                </div>
+                <div class="categoriaForm">
+                    <p><strong>Nombre:</strong> <span id="perfilNombre">Cargando...</span></p>
+                    <p><strong>Email:</strong> <span id="perfilEmail">Cargando...</span></p>
+                    <p><strong>Rol:</strong> <span id="perfilRol">Cargando...</span></p>
+                    <p><strong>ID de usuario:</strong> <span id="perfilId">Cargando...</span></p>
+                </div>
+            </div>
+
+            <button id="botondeplegable">Cambiar contraseña</button>  <!-- boton que desplega formulario -->
+
+            <!-- Formulario para cambiar contraseña (opcional) -->
+            <div class="actualizar">
+                <h3>Cambiar Contraseña</h3>
+                <form id="cont-actualizar">
+                    <div class="cont-datos">
+                        <label>Nueva contraseña:</label>
+                        <input type="password" id="contraseña" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirmar contraseña:</label>
+                        <input type="password" id="confirmacion" required>
+                    </div>
+                    <button id="actu" type="submit">Actualizar Contraseña</button>
+                </form>
+                <p id="passwordMessage" class="message"></p>
+            </div>
+
+            <!-- Información del sistema -->
+            <div class="tabla-container">
+                <h3>ℹ️ Información del Sistema</h3>
+                <p>Versión: 1.0.0</p>
+                <p>Usuario desde: <span id="fechaRegistro">Cargando...</span></p>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="./javascripts/utils.js"></script>
+    <script src="./javascripts/perfil.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Login - Sistema de Inventario</title>
+    <link rel='stylesheet' href='./css/estilos1.css'>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Inicio de Sesión</h1>
+        
+        <div class="container">
+            <img src="./css/log.png" alt="logo">
+            
+            <input class="input1" type="text" id="email" placeholder="Correo electrónico">
+            <input class="input2" type="password" id="password" placeholder="Contraseña">
+            
+            <button id="loginBtn">Iniciar sesión</button>
+            
+            <p id="errorMessage" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Script de login (todo junto, sin depender de utils.js para el login) -->
+    <script>
+        const API_URL = 'http://localhost:3000';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.getElementById('loginBtn');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            async function hacerLogin() {
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                
+                if (!email || !password) {
+                    errorMsg.textContent = 'Por favor, ingresa email y contraseña';
+                    return;
+                }
+                
+                const originalText = loginBtn.textContent;
+                loginBtn.textContent = 'Ingresando...';
+                loginBtn.disabled = true;
+                
+                try {
+                    console.log('Enviando login a:', `${API_URL}/login`);
+                    
+                    const res = await fetch(`${API_URL}/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password }),
+                        credentials: 'include'
+                    });
+                    
+                    console.log('Respuesta status:', res.status);
+                    
+                    if (res.ok) {
+                        console.log('Login exitoso');
+                        // Esperar 500ms para que la cookie se guarde
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 500);
+                    
+                    } else {
+                        const error = await res.text();
+                        errorMsg.textContent = error || 'Email o contraseña incorrectos';
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    errorMsg.textContent = 'Error de conexión con el servidor';
+                } finally {
+                    loginBtn.textContent = originalText;
+                    loginBtn.disabled = false;
+                }
+            }
+            
+            loginBtn.addEventListener('click', hacerLogin);
+            
+            emailInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') hacerLogin();
+            });
+            
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') hacerLogin();
+            });
+        });
+    </script>
+</body>
+</html>
