@@ -1,6 +1,6 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://proappweb-production.up.railway.app';
 
-// ============ SESIÓN ============
+// |||||||||| SESIÓN ||||||||||
 async function verificarSesion() {
     try {
         const res = await fetch(`${API_URL}/perfil`, { 
@@ -93,7 +93,7 @@ async function eliminarProducto(id) {
     return res.ok;
 }
 
-// ============ CATEGORÍAS ============
+// |||||||||| CATEGORÍAS ||||||||||
 async function obtenerCategorias() {
     try {
         const res = await fetch(`${API_URL}/categorias`, { 
@@ -109,7 +109,7 @@ async function obtenerCategorias() {
     }
 }
 
-//funciones de menu, cerrar sesion
+// funciones de menu, cerrar sesion
 function escapeHtml(str) {
     if (!str) return '';
     return String(str).replace(/[&<>]/g, function(m) {
@@ -120,7 +120,7 @@ function escapeHtml(str) {
     });
 }
 
-// ============ CONFIGURAR MENÚ HAMBURGUESA ============
+// |||||||||| CONFIGURAR MENÚ HAMBURGUESA ||||||||||
 function configurarMenuHamburguesa() {
     const burguer = document.getElementById('burguer');
     const navMenu = document.getElementById('nav-menu');
@@ -138,7 +138,7 @@ function configurarMenuHamburguesa() {
     }
 }
 
-// ============ CONFIGURAR CIERRE DE SESIÓN ============
+// |||||||||| CONFIGURAR CIERRE DE SESIÓN ||||||||||
 function configurarLogoutGlobal() {
     const logoutBtn = document.getElementById('logoutLink');
     if (logoutBtn) {

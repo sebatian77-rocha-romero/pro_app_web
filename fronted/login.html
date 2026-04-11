@@ -24,7 +24,7 @@
 
     <!-- Script de login (todo junto, sin depender de utils.js para el login) -->
     <script>
-        const API_URL = 'http://localhost:3000';
+        const API_URL = 'https://proappweb-production.up.railway.app';
         
         document.addEventListener('DOMContentLoaded', () => {
             const loginBtn = document.getElementById('loginBtn');
@@ -59,7 +59,7 @@
                     
                     if (res.ok) {
                         console.log('Login exitoso');
-                        // Esperar 500ms para que la cookie se guarde
+                        // esperar 500ms para que la cookie se guarde corectamente al loguearse
                         setTimeout(() => {
                             window.location.href = 'index.html';
                         }, 500);
