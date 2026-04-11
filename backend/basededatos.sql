@@ -14,7 +14,7 @@ CREATE TABLE usuarios (
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     rol ENUM('admin', 'usuario') DEFAULT 'usuario'
-)
+);
 
 -- ============================================
 -- TABLA: categorias
