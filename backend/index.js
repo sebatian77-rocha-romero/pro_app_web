@@ -30,8 +30,7 @@ app.use(session({
     }
 }));
 
-// Servir archivos estáticos del frontend  
-app.use(express.static(path.join(__dirname, '../fronted')));
+app.use(express.static(path.resolve(__dirname, '../fronted')));
 
 // |||||||||||| RUTAS DE USUARIOS |||||||||||||||
 
@@ -282,7 +281,7 @@ app.delete('/categorias/:id', (req, res) => {
 
 // ============ RUTA PARA MANEJAR TODAS LAS DEMÁS PETICIONES ============
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../fronted', 'registro.html'));
+    res.sendFile(path.resolve(__dirname, '../fronted', 'registro.html'));
 });
 
 // ============ INICIAR SERVIDOR ============
