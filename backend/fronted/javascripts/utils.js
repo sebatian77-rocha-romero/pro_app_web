@@ -1,6 +1,6 @@
 const API_URL = 'https://proappweb-production.up.railway.app';
 
-// |||||||||| SESIÓN ||||||||||
+// |||||||||| SESIÓN (manejo de validacion y errores) ||||||||||
 async function verificarSesion() {
     try {
         const res = await fetch(`${API_URL}/perfil`, { 
@@ -120,7 +120,7 @@ function escapeHtml(str) {
     });
 }
 
-// |||||||||| CONFIGURAR MENÚ HAMBURGUESA ||||||||||
+// |||||||||| CONFIGURACION DEL MENU HAMBURGUESA ||||||||||
 function configurarMenuHamburguesa() {
     const burguer = document.getElementById('burguer');
     const navMenu = document.getElementById('nav-menu');
