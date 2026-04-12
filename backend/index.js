@@ -6,7 +6,7 @@ const session = require('express-session');
 const path = require("path");
 
 console.log('__dirname:', __dirname);
-console.log('Ruta frontend:', path.join(__dirname, '..', 'fronted'));
+console.log('Ruta frontend:', path.join(__dirname, 'fronted'));
 
 const app = express();
 
@@ -33,7 +33,7 @@ app.use(session({
     }
 }));
 
-app.use(express.static(path.join(__dirname, '..', 'fronted')));
+app.use(express.static(path.join(__dirname, 'fronted')));
 
 // |||||||||||| RUTAS DE USUARIOS |||||||||||||||
 
@@ -284,11 +284,10 @@ app.delete('/categorias/:id', (req, res) => {
 
 // ============ RUTA PARA MANEJAR TODAS LAS DEMÁS PETICIONES ============
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'fronted', 'registro.html'));
+    res.sendFile(path.join(__dirname, 'fronted', 'registro.html'));
 });
 
-console.log('Ruta frontend:', path.join(__dirname, '..', 'fronted'));
-
+console.log('Ruta frontend:', path.join(__dirname, 'fronted'));
 
 // ============ INICIAR SERVIDOR ============
 
