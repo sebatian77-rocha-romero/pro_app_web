@@ -91,7 +91,7 @@ async function cargarUltimosProductos() {
     container.innerHTML = ultimos.map(p => `
         <div class="recent-item" style="border-left: 4px solid #27ae60; padding: 10px; margin: 5px 0; background: #f8f9fa; border-radius: 5px;">
             <strong>${escapeHtml(p.nombre)}</strong><br>
-            💰 $${parseFloat(p.precio||0).toFixed(2)} | 📦 Stock: ${p.cantidad || 0}
+             $${parseFloat(p.precio||0).toFixed(2)} |  Stock: ${p.cantidad || 0}
         </div>
     `).join('');
 }
@@ -102,7 +102,7 @@ function configurarActualizarBtn() {
     const btn = document.getElementById('actualizarStatsBtn');
     if (btn) {
         btn.addEventListener('click', async () => {
-            btn.textContent = '⏳ Actualizando...';
+            btn.textContent = 'Actualizando...';
             await cargarEstadisticas();
             await cargarStockBajo();
             await cargarUltimosProductos();
