@@ -33,7 +33,7 @@ app.use(session({
 // Servir archivos estáticos del frontend  
 app.use(express.static(path.join(__dirname, '../fronted')));
 
-// ============ RUTAS DE USUARIOS ============
+// |||||||||||| RUTAS DE USUARIOS |||||||||||||||
 
 app.post('/usuarios', async (req, res) => {
     try {
@@ -152,7 +152,7 @@ app.post('/cambiar-password', async (req, res) => {
     }
 });
 
-// ============ RUTAS DE PRODUCTOS ============
+// |||||||||||| RUTAS DE PRODUCTOS ||||||||||||
 
 app.get('/productos', (req, res) => {
     if (!req.session.usuario) return res.status(401).send('No autorizado');
@@ -192,9 +192,8 @@ app.put('/productos/:id', (req, res) => {
     const { id } = req.params;
     const { nombre, categoria_id, cantidad, precio } = req.body;    
     
-    const sql = `UPDATE productos SET nombre = ?, categoria = ?, cantidad = ?, precio = ? WHERE id = ? AND usuario_id = ?`;
-    
-    db.query(sql, [nombre, categoria, cantidad, precio, id, req.session.usuario.id], 
+    const sql = `UPDATE productos SET nombre = ?, categoria_id = ?, cantidad = ?, precio = ? WHERE id = ? AND usuario_id = ?`;
+    db.query(sql, [nombre, categoria_id, cantidad, precio, id, req.session.usuario.id],
         (err, result) => {
             if (err) {
                 return res.status(500).send(err.message);
