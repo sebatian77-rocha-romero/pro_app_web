@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const path = require("path");
 
+console.log('__dirname:', __dirname);
+console.log('Ruta frontend:', path.join(__dirname, '..', 'fronted'));
+
 const app = express();
 
 // Configuración CORS
