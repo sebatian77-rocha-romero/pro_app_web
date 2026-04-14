@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     configurarLogoutGlobal();
 });
 
-// ============ CATEGORÍAS EN SELECT ============
+// ||||||||||||||||| CATEGORÍAS EN SELECT |||||||||||||||||
 
 async function cargarCategoriasEnSelect() {
     const select = document.getElementById('categoria');
@@ -29,7 +29,7 @@ async function cargarCategoriasEnSelect() {
     });
 }
 
-// ============ CARGAR Y MOSTRAR PRODUCTOS ============
+// |||||||||||||| CARGAR Y MOSTRAR PRODUCTOS |||||||||||||||||
 
 async function cargarProductos() {
     console.log('Cargando productos...');
@@ -49,7 +49,7 @@ function mostrarProductos(productos) {
 
     tbody.innerHTML = productos.map(p => {
         const estado = (p.cantidad || 0) < 5
-            ? '<span style="color:#e74c3c; font-weight:bold;">⚠️ Stock bajo</span>'
+            ? '<span style="color:#e74c3c; font-weight:bold;">Stock bajo</span>'
             : '<span style="color:#27ae60; font-weight:bold;">✓ Normal</span>';
 
         return `
@@ -61,15 +61,15 @@ function mostrarProductos(productos) {
                 <td>$${parseFloat(p.precio || 0).toFixed(2)}</td>
                 <td>${estado}</td>
                 <td>
-                    <button class="btn-editar" onclick="editarProducto(${p.id})">✏️ Editar</button>
-                    <button class="btn-eliminar" onclick="borrarProducto(${p.id})">🗑️ Eliminar</button>
+                    <button class="btn-editar" onclick="editarProducto(${p.id})">Editar</button>
+                    <button class="btn-eliminar" onclick="borrarProducto(${p.id})">Eliminar</button>
                 </td>
             </tr>
         `;
     }).join('');
 }
 
-// ============ FORMULARIO ============
+// |||||||||||| FORMULARIO ||||||||||||||
 
 function configurarFormulario() {
     const form = document.getElementById('productoForm');
@@ -87,7 +87,7 @@ function configurarFormulario() {
             };
 
             if (!producto.nombre) {
-                alert('❌ El nombre del producto es requerido');
+                alert('El nombre del producto es requerido');
                 return;
             }
 
@@ -96,10 +96,10 @@ function configurarFormulario() {
 
             if (productoId) {
                 success = await actualizarProducto(productoId, producto);
-                if (success) alert('✅ Producto actualizado');
+                if (success) alert('Producto actualizado');
             } else {
                 success = await crearProducto(producto);
-                if (success) alert('✅ Producto creado');
+                if (success) alert('Producto creado');
             }
 
             if (success) {
@@ -107,7 +107,7 @@ function configurarFormulario() {
                 await cargarProductos();
                 await cargarCategoriasEnSelect();
             } else {
-                alert('❌ Error al guardar');
+                alert('Error al guardar');
             }
         });
     }
@@ -117,7 +117,7 @@ function configurarFormulario() {
     }
 }
 
-// ============ ACCIONES ============
+// ||||||||||||||||| ACCIONES ||||||||||||||||||
 
 async function editarProducto(id) {
     const producto = productosGlobal.find(p => p.id === id);
