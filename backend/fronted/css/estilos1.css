@@ -106,7 +106,7 @@ button {
     align-self: center;
     width: auto;
     padding: 10px 20px;
-    max-width: 50px;
+    max-width: 100px;
     height: 45px;
     background: linear-gradient(235deg, #2be8a0, #1f6fc2);
     color: #000;
@@ -115,7 +115,7 @@ button {
     border-radius: 13px;
     cursor: pointer;
     margin-top: 20px;
-    box-shadow: 0 8px 15px rgba(43, 140, 232, 0.5);
+    box-shadow: 0 8px 15px rgba(43, 110, 202, 0.5);
 }
 
 button:hover {
