@@ -480,6 +480,7 @@ img {
     border-radius: 13px;
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(43, 140, 232, 0.5);
+    text-align: center;
 }
 
 #actu {
@@ -492,6 +493,7 @@ img {
     border-radius: 13px;
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(43, 140, 232, 0.5);
+    text-align: center;
 }
 
 
