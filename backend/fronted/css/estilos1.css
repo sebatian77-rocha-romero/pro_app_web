@@ -103,9 +103,7 @@ h3 {
 
 
 button {
-    align-self: center;
-    width: auto;
-    padding: 10px 20px;
+    padding: 0;
     max-width: 120px;
     height: 45px;
     width: 100px;
@@ -120,6 +118,7 @@ button {
     display: flex;
     align-items: center;
     flex-direction: column;
+    text-align: center;
     
 }
 
