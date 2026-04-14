@@ -604,7 +604,7 @@ p {
     background: linear-gradient(235deg, #2be8a0, #1f6fc2);
 }
 
-.section {
+.estadisticas {
     width: 100%;
     max-width: 600px;
     background: #242424;
@@ -612,7 +612,8 @@ p {
     border-radius: 15px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
     margin-top: 30px;
-    margin-left: 40px;
+    margin-left: 0;
+    box-sizing: border-box;
 }
 
 .section-header {
