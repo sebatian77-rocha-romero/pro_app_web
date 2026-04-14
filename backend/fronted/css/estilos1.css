@@ -108,6 +108,7 @@ button {
     padding: 10px 20px;
     max-width: 100px;
     height: 45px;
+    width: 85px;
     background: linear-gradient(235deg, #2be8a0, #1f6fc2);
     color: #000;
     font-weight: bold;
