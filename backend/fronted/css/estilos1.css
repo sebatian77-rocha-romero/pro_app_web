@@ -150,7 +150,13 @@ img {
     font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-
+.container-index {
+    width: 100%;
+    max-width: 700px;
+    box-sizing: border-box;
+    padding: 10px, 20px;
+    overflow-x: hidden;
+}
 
 .burguer {
   position: fixed;   
@@ -316,7 +322,6 @@ img {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
 
 }
-
 
 
 
