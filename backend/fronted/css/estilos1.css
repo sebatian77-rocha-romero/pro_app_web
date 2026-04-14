@@ -116,7 +116,10 @@ button {
     border-radius: 13px;
     cursor: pointer;
     margin-top: 20px;
-    box-shadow: 0 8px 15px rgba(43, 110, 202, 0.5);
+    box-shadow: 0 8px 15px rgba(53, 130, 202, 0.4);
+    align-items: center;
+    flex-direction: column;
+    
 }
 
 button:hover {
