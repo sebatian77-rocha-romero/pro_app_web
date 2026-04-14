@@ -103,12 +103,13 @@ h3 {
 
 
 button {
-    padding: 0;
+    align-self: center;
+    width: 100px;      
     max-width: 120px;
     height: 45px;
-    width: 100px;
+    padding: 0;          
     background: linear-gradient(235deg, #2be8a0, #1f6fc2);
-    color: #ffffff;
+    color: #ffffff;      
     font-weight: bold;
     border: none;
     border-radius: 13px;
@@ -116,10 +117,9 @@ button {
     margin-top: 20px;
     box-shadow: 0 8px 15px rgba(53, 130, 202, 0.4);
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    
+    align-items: center;    
+    justify-content: center; 
+    text-align: center;      
 }
 
 button:hover {
