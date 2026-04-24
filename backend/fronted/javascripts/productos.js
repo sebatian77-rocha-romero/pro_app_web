@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     configurarBusqueda();
     configurarMenuHamburguesa();
     configurarLogoutGlobal();
+    mostrarToastStockBajo();
 });
 
 // ||||||||||||||||| CATEGORÍAS EN SELECT |||||||||||||||||
@@ -27,6 +28,32 @@ async function cargarCategoriasEnSelect() {
     categoriasGlobal.forEach(cat => {
         select.innerHTML += `<option value="${cat.id}">${escapeHtml(cat.nombre)}</option>`;
     });
+}
+
+function mostrarToastStockBajo() {
+    const stockBajo = productosGlobal.filter(p => (p.cantidad || 0) < 5);
+    if (stockBajo.length === 0) return;
+
+    const toastBody = document.getElementById('toastBody');
+    if (toastBody) {
+        toastBody.innerHTML = stockBajo.map(p => `
+            <div class="toast-item">
+                <strong>${escapeHtml(p.nombre)}</strong> — Stock: ${p.cantidad}
+            </div>
+        `).join('');
+    }
+
+    setTimeout(() => {
+        const toast = document.getElementById('toastStockBajo');
+        if (toast) toast.classList.add('show');
+    }, 1000);
+
+    setTimeout(() => cerrarToast(), 6000);
+}
+
+function cerrarToast() {
+    const toast = document.getElementById('toastStockBajo');
+    if (toast) toast.classList.remove('show');
 }
 
 // |||||||||||||| CARGAR Y MOSTRAR PRODUCTOS |||||||||||||||||
