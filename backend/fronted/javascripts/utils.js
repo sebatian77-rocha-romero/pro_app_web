@@ -138,6 +138,22 @@ function configurarMenuHamburguesa() {
     }
 }
 
+// Mostrar enlace admin solo si es admin
+async function mostrarMenuAdmin() {
+    const usuario = await obtenerUsuario();
+    if (usuario && usuario.rol === 'admin') {
+        const navMenu = document.getElementById('nav-menu');
+        if (navMenu) {
+            const ul = navMenu.querySelector('ul');
+            if (ul && !document.getElementById('adminLink')) {
+                const li = document.createElement('li');
+                li.innerHTML = '<a href="admin.html" id="adminLink">Usuarios (Admin)</a>';
+                ul.insertBefore(li, ul.lastElementChild);
+            }
+        }
+    }
+}
+
 // |||||||||| CONFIGURAR CIERRE DE SESIÓN ||||||||||
 function configurarLogoutGlobal() {
     const logoutBtn = document.getElementById('logoutLink');
