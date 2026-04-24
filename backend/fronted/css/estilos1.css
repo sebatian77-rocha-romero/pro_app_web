@@ -67,14 +67,22 @@ h3 {
 
 
 /* estilo adaptativvo para celulares */
-@media (max-width: 480px) {
-    .container {
-        padding: 15px;
+@media (max-width: 768px) {
+    .container-index {
+        padding: 10px 15px;
     }
 
-    h1 {
-        font-size: 20px;
-        text-align: center;
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        min-width: 140px;
+    }
+
+    .container-c {
+        max-width: 100%;
+        margin: 10px;
     }
 }
 
@@ -169,9 +177,9 @@ img {
 
 .container-index {
     width: 100%;
-    max-width: 700px;
+    max-width: 1200px;
     box-sizing: border-box;
-    padding: 10px, 20px;
+    padding: 20px 40px;
     overflow-x: hidden;
 }
 
@@ -273,7 +281,8 @@ img {
 
 .form-container{
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
+    box-sizing: border-box;
     height: auto;
     background: #242424;
     padding: 24px;
@@ -325,19 +334,17 @@ img {
 
 .container-c {
     width: 100%;
-    max-width: 600px;
-    margin: 20px;
+    max-width: 1000px;
+    margin: 20px auto;
     height: auto;
+    box-sizing: border-box;
     background: #242424;
     padding: 25px;
     border-radius: 15px;
     display: flex;
     align-items: center;
     flex-direction: column;
-
-
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-
 }
 
 
@@ -608,6 +615,7 @@ p {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    width: 100%;
 }
 
 .card {
@@ -615,12 +623,31 @@ p {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 10px;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    background: #242424;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
+
 
 .card-icon {
     font-size: 40px;
     margin-bottom: 10px;
+}
+
+.section {
+    width: 100%;
+    max-width: 100%;  /* ocupa todo el ancho disponible */
+    background: #242424;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    margin-top: 30px;
+    margin-left: 0;
+    box-sizing: border-box;
 }
 
 .btn-primary {
@@ -669,9 +696,15 @@ p {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
+
+.alert-section, .recent-section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .stat-card{
     background: #1A1A1A;
     padding: 20px;
