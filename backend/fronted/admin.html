@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Gestión de Usuarios - Admin</title>
+    <link rel='stylesheet' href='./css/estilos1.css'>
+</head>
+<body class="body_c">
+
+    <button class="burguer" id="burguer">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="nav-menu" id="nav-menu">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="categorias.html">Categorías</a></li>
+            <li><a href="perfil.html">Mi Perfil</a></li>
+            <li><a href="admin.html" class="active">Usuarios</a></li>
+            <li><a href="#" id="logoutLink">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+
+    <main class="container-c">
+        <h2>Gestión de Usuarios</h2>
+
+        <div class="tabla-container">
+            <h3>Lista de Usuarios</h3>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="usuariosBody">
+                    <tr><td colspan="5">Cargando usuarios...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="./javascripts/utils.js"></script>
+    <script src="./javascripts/admin.js"></script>
+</body>
+</html>

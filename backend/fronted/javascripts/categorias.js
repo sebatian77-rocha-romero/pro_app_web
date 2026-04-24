@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     configurarFormulario();
     configurarMenuHamburguesa();
     configurarLogoutGlobal();
+    mostrarMenuAdmin();
 });
 
 // ||||||||||CARGAR Y MOSTRAR||||||||

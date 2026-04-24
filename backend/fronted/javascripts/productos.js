@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     configurarMenuHamburguesa();
     configurarLogoutGlobal();
     mostrarToastStockBajo();
+    mostrarMenuAdmin();
 });
 
 // ||||||||||||||||| CATEGORÍAS EN SELECT |||||||||||||||||

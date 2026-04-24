@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     configurarLogoutGlobal(); // global
     configurarBotonDesplegable(); // local
     configurarCambioPassword(); // local
+    mostrarMenuAdmin(); // global
 });
 
 //carga el perfil en la pagina con sus datos

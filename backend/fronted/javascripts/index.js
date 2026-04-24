@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     configurarMenuHamburguesa();
     configurarLogoutGlobal();
     configurarActualizarBtn();
+    mostrarMenuAdmin();
 });
 // carga y muestra nombre del usuario en el index o pagina principal
 async function cargarNombreUsuario() {
@@ -111,3 +112,40 @@ function configurarActualizarBtn() {
         });
     }
 }
+
+//  |||||||||RUTAS DE ADMIN||||||||||||||
+
+app.get('/admin/usuarios', (req, res) => {
+    if (!req.session.usuario) return res.status(401).send('No autorizado');
+    if (req.session.usuario.rol !== 'admin') return res.status(403).send('Acceso denegado');
+
+    const sql = 'SELECT id, nombre, email, rol FROM usuarios ORDER BY id ASC';
+    db.query(sql, (err, results) => {
+        if (err) return res.status(500).send(err.message);
+        res.json(results);
+    });
+});
+
+app.put('/admin/usuarios/:id', (req, res) => {
+    if (!req.session.usuario) return res.status(401).send('No autorizado');
+    if (req.session.usuario.rol !== 'admin') return res.status(403).send('Acceso denegado');
+
+    const { rol } = req.body;
+    const sql = 'UPDATE usuarios SET rol = ? WHERE id = ?';
+    db.query(sql, [rol, req.params.id], (err, result) => {
+        if (err) return res.status(500).send(err.message);
+        res.send('Rol actualizado');
+    });
+});
+
+app.delete('/admin/usuarios/:id', (req, res) => {
+    if (!req.session.usuario) return res.status(401).send('No autorizado');
+    if (req.session.usuario.rol !== 'admin') return res.status(403).send('Acceso denegado');
+    if (req.params.id == req.session.usuario.id) return res.status(400).send('No puedes eliminarte a ti mismo');
+
+    const sql = 'DELETE FROM usuarios WHERE id = ?';
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) return res.status(500).send(err.message);
+        res.send('Usuario eliminado');
+    });
+});
