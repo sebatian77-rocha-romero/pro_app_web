@@ -106,6 +106,7 @@ button {
     align-self: center;
     padding: 10px 20px;
     height: 45px;
+    width: 100%;
     background: linear-gradient(235deg, #2be8a0, #1f6fc2);
     color: #ffffff;
     font-weight: bold;
