@@ -207,3 +207,62 @@ function configurarBusqueda() {
     if (searchInput) searchInput.addEventListener('input', filtrar);
     if (searchCategoria) searchCategoria.addEventListener('input', filtrar);
 }
+
+
+// |||||||||||exportar |||||||||||||||
+function exportarExcel() {
+    if (!productosGlobal || productosGlobal.length === 0) {
+        alert('No hay productos para exportar');
+        return;
+    }
+
+    const datos = productosGlobal.map(p => ({
+        ID: p.id,
+        Nombre: p.nombre,
+        Categoría: p.categoria || '-',
+        Cantidad: p.cantidad || 0,
+        Precio: parseFloat(p.precio || 0).toFixed(2),
+        Estado: (p.cantidad || 0) < 5 ? 'Stock bajo' : 'Normal'
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(datos);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Productos');
+    XLSX.writeFile(wb, 'inventario_productos.xlsx');
+}
+
+function exportarPDF() {
+    if (!productosGlobal || productosGlobal.length === 0) {
+        alert('No hay productos para exportar');
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text('Inventario de Productos', 14, 20);
+    doc.setFontSize(11);
+    doc.text(`Generado: ${new Date().toLocaleDateString('es-MX')}`, 14, 28);
+
+    const columnas = ['ID', 'Nombre', 'Categoría', 'Cantidad', 'Precio', 'Estado'];
+    const filas = productosGlobal.map(p => [
+        p.id,
+        p.nombre,
+        p.categoria || '-',
+        p.cantidad || 0,
+        `$${parseFloat(p.precio || 0).toFixed(2)}`,
+        (p.cantidad || 0) < 5 ? 'Stock bajo' : 'Normal'
+    ]);
+
+    doc.autoTable({
+        head: [columnas],
+        body: filas,
+        startY: 35,
+        styles: { fontSize: 10 },
+        headStyles: { fillColor: [31, 111, 194] },
+        alternateRowStyles: { fillColor: [245, 245, 245] }
+    });
+
+    doc.save('inventario_productos.pdf');
+}
