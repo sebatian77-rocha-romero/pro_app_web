@@ -73,7 +73,7 @@ h3 {
     }
 
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .card {
@@ -592,8 +592,13 @@ img {
 .tabla {
     width: 100%;
     border-collapse: collapse;
-    min-width: 500px; /*fuerza ancho mínimo para que no se comprima */
+    min-width: 300px; /*fuerza ancho mínimo para que no se comprima */
 }
+
+#productosTable {
+    min-width: 550px;
+}
+
 
 textarea {
     color: white;
@@ -738,7 +743,7 @@ p {
 
 .stat-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
