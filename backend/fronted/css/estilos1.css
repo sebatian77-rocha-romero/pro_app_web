@@ -919,3 +919,15 @@ p {
     font-weight: bold;
 }
 
+.export-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0 20px 0;
+    flex-wrap: wrap;
+}
+
+.export-buttons button {
+    margin-top: 0;
+    padding: 10px 20px;
+    height: auto;
+}
