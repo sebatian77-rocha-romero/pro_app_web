@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Historial - Sistema de Inventario</title>
+    <link rel='stylesheet' href='./css/estilos1.css'>
+</head>
+<body class="body_c">
+
+    <button class="burguer" id="burguer">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="nav-menu" id="nav-menu">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="categorias.html">Categorías</a></li>
+            <li><a href="perfil.html">Mi Perfil</a></li>
+            <li><a href="historial.html" class="active">Historial</a></li>
+            <li><a href="#" id="logoutLink">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+
+    <main class="container-c">
+        <h2>Historial de Movimientos</h2>
+
+        <div class="tabla-container">
+            <h3>Últimos movimientos</h3>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Usuario</th>
+                        <th>Acción</th>
+                        <th>Producto</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody id="historialBody">
+                    <tr><td colspan="5">Cargando historial...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="./javascripts/utils.js"></script>
+    <script src="./javascripts/historial.js"></script>
+</body>
+</html>

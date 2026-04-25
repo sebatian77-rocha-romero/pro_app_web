@@ -167,3 +167,17 @@ function configurarLogoutGlobal() {
         });
     }
 }
+
+// ||||||||||||||historial de accciones||||||||||||
+async function registrarHistorial(accion, producto_nombre, detalle) {
+    try {
+        await fetch(`${API_URL}/historial`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accion, producto_nombre, detalle }),
+            credentials: 'include'
+        });
+    } catch (error) {
+        console.error('Error registrando historial:', error);
+    }
+}

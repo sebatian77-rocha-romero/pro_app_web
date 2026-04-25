@@ -266,3 +266,37 @@ function exportarPDF() {
 
     doc.save('inventario_productos.pdf');
 }
+
+
+// al crear producto — después del if (success)
+if (productoId) {
+    success = await actualizarProducto(productoId, producto);
+    if (success) {
+        await registrarHistorial('editar', producto.nombre, 
+            `Cantidad: ${producto.cantidad} | Precio: $${producto.precio}`);
+        alert('Producto actualizado');
+    }
+} else {
+    success = await crearProducto(producto);
+    if (success) {
+        await registrarHistorial('crear', producto.nombre, 
+            `Cantidad: ${producto.cantidad} | Precio: $${producto.precio}`);
+        alert('Producto creado');
+    }
+}
+
+// al eliminar producto — en borrarProducto()
+async function borrarProducto(id) {
+    if (!confirm('¿Estás seguro de eliminar este producto?')) return;
+    
+    const producto = productosGlobal.find(p => p.id === id);
+    const success = await eliminarProducto(id);
+    if (success) {
+        await registrarHistorial('eliminar', producto?.nombre || 'Producto', 
+            `ID: ${id}`);
+        alert('Producto eliminado');
+        await cargarProductos();
+    } else {
+        alert('Error al eliminar');
+    }
+}
