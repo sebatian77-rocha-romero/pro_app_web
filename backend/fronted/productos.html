@@ -29,11 +29,7 @@
         </ul>
     </nav>
 
-    <!-- Botones de exportar -->
-    <div class="export-buttons">
-        <button onclick="exportarExcel()">Exportar Excel</button>
-        <button onclick="exportarPDF()">Exportar PDF</button>
-    </div>
+    
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="container-c">
@@ -84,6 +80,11 @@
         <div class="form-container"> <!-- reutilizas estilo -->
             <input type="text" id="searchInput" placeholder="Buscar producto..." class="input1">
             <input type="text" id="searchCategoria" placeholder="buscar por categoria..." class="input1">
+        </div>
+        <!-- Botones de exportar ← aquí adentro -->
+        <div class="export-buttons">
+            <button onclick="exportarExcel()">Exportar Excel</button>
+            <button onclick="exportarPDF()">Exportar PDF</button>
         </div>
 
         <!-- tabla -->
