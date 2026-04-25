@@ -3,8 +3,6 @@ let categoriasGlobal = [];
 let editandoId = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('Productos página cargada');
-
     const autenticado = await verificarSesion();
     if (!autenticado) return;
 
@@ -18,12 +16,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     mostrarMenuAdmin();
 });
 
-// ||||||||||||||||| CATEGORÍAS EN SELECT |||||||||||||||||
-
 async function cargarCategoriasEnSelect() {
     const select = document.getElementById('categoria');
     if (!select) return;
-
     categoriasGlobal = await obtenerCategorias();
     select.innerHTML = '<option value="">Seleccionar categoría...</option>';
     categoriasGlobal.forEach(cat => {
@@ -34,7 +29,6 @@ async function cargarCategoriasEnSelect() {
 function mostrarToastStockBajo() {
     const stockBajo = productosGlobal.filter(p => (p.cantidad || 0) < 5);
     if (stockBajo.length === 0) return;
-
     const toastBody = document.getElementById('toastBody');
     if (toastBody) {
         toastBody.innerHTML = stockBajo.map(p => `
@@ -43,12 +37,10 @@ function mostrarToastStockBajo() {
             </div>
         `).join('');
     }
-
     setTimeout(() => {
         const toast = document.getElementById('toastStockBajo');
         if (toast) toast.classList.add('show');
     }, 1000);
-
     setTimeout(() => cerrarToast(), 6000);
 }
 
@@ -57,29 +49,22 @@ function cerrarToast() {
     if (toast) toast.classList.remove('show');
 }
 
-// |||||||||||||| CARGAR Y MOSTRAR PRODUCTOS |||||||||||||||||
-
 async function cargarProductos() {
-    console.log('Cargando productos...');
     productosGlobal = await obtenerProductos();
-    console.log('Productos recibidos:', productosGlobal);
     mostrarProductos(productosGlobal);
 }
 
 function mostrarProductos(productos) {
     const tbody = document.getElementById('productosBody');
     if (!tbody) return;
-
     if (!productos || productos.length === 0) {
         tbody.innerHTML = '<tr><td colspan="7">No hay productos registrados. ¡Crea uno!</td></tr>';
         return;
     }
-
     tbody.innerHTML = productos.map(p => {
         const estado = (p.cantidad || 0) < 5
             ? '<span style="color:#e74c3c; font-weight:bold;">Stock bajo</span>'
             : '<span style="color:#27ae60; font-weight:bold;">✓ Normal</span>';
-
         return `
             <tr>
                 <td>${p.id}</td>
@@ -96,8 +81,6 @@ function mostrarProductos(productos) {
         `;
     }).join('');
 }
-
-// |||||||||||| FORMULARIO ||||||||||||||
 
 function configurarFormulario() {
     const form = document.getElementById('productoForm');
@@ -124,10 +107,18 @@ function configurarFormulario() {
 
             if (productoId) {
                 success = await actualizarProducto(productoId, producto);
-                if (success) alert('Producto actualizado');
+                if (success) {
+                    await registrarHistorial('editar', producto.nombre,
+                        `Cantidad: ${producto.cantidad} | Precio: $${producto.precio}`);
+                    alert('Producto actualizado');
+                }
             } else {
                 success = await crearProducto(producto);
-                if (success) alert('Producto creado');
+                if (success) {
+                    await registrarHistorial('crear', producto.nombre,
+                        `Cantidad: ${producto.cantidad} | Precio: $${producto.precio}`);
+                    alert('Producto creado');
+                }
             }
 
             if (success) {
@@ -145,32 +136,26 @@ function configurarFormulario() {
     }
 }
 
-// ||||||||||||||||| ACCIONES ||||||||||||||||||
-
 async function editarProducto(id) {
     const producto = productosGlobal.find(p => p.id === id);
     if (!producto) return;
-
     document.getElementById('productoId').value = producto.id;
     document.getElementById('nombre').value = producto.nombre;
-    //aeleccionar la categoría por categoria_id
     document.getElementById('categoria').value = producto.categoria_id || '';
     document.getElementById('cantidad').value = producto.cantidad;
     document.getElementById('precio').value = producto.precio;
-
     document.getElementById('formTitle').textContent = 'Editar Producto';
     document.getElementById('submitBtn').textContent = 'Actualizar Producto';
     document.getElementById('cancelBtn').style.display = 'inline-block';
-
-    //scroll al formulario
     document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' });
 }
 
 async function borrarProducto(id) {
     if (!confirm('¿Estás seguro de eliminar este producto?')) return;
-
+    const producto = productosGlobal.find(p => p.id === id);
     const success = await eliminarProducto(id);
     if (success) {
+        await registrarHistorial('eliminar', producto?.nombre || 'Producto', `ID: ${id}`);
         alert('Producto eliminado');
         await cargarProductos();
     } else {
@@ -187,35 +172,27 @@ function limpiarFormulario() {
     editandoId = null;
 }
 
-// ============ BÚSQUEDA DE PRODUCTOS CON EL INPUT ============
-
 function configurarBusqueda() {
     const searchInput = document.getElementById('searchInput');
     const searchCategoria = document.getElementById('searchCategoria');
-
     const filtrar = () => {
         const termNombre = searchInput ? searchInput.value.toLowerCase() : '';
         const termCategoria = searchCategoria ? searchCategoria.value.toLowerCase() : '';
-
         const filtrados = productosGlobal.filter(p =>
             p.nombre.toLowerCase().includes(termNombre) &&
             (p.categoria || '').toLowerCase().includes(termCategoria)
         );
         mostrarProductos(filtrados);
     };
-
     if (searchInput) searchInput.addEventListener('input', filtrar);
     if (searchCategoria) searchCategoria.addEventListener('input', filtrar);
 }
 
-
-// |||||||||||exportar |||||||||||||||
 function exportarExcel() {
     if (!productosGlobal || productosGlobal.length === 0) {
         alert('No hay productos para exportar');
         return;
     }
-
     const datos = productosGlobal.map(p => ({
         ID: p.id,
         Nombre: p.nombre,
@@ -224,7 +201,6 @@ function exportarExcel() {
         Precio: parseFloat(p.precio || 0).toFixed(2),
         Estado: (p.cantidad || 0) < 5 ? 'Stock bajo' : 'Normal'
     }));
-
     const ws = XLSX.utils.json_to_sheet(datos);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Productos');
@@ -236,15 +212,12 @@ function exportarPDF() {
         alert('No hay productos para exportar');
         return;
     }
-
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-
     doc.setFontSize(18);
     doc.text('Inventario de Productos', 14, 20);
     doc.setFontSize(11);
     doc.text(`Generado: ${new Date().toLocaleDateString('es-MX')}`, 14, 28);
-
     const columnas = ['ID', 'Nombre', 'Categoría', 'Cantidad', 'Precio', 'Estado'];
     const filas = productosGlobal.map(p => [
         p.id,
@@ -254,7 +227,6 @@ function exportarPDF() {
         `$${parseFloat(p.precio || 0).toFixed(2)}`,
         (p.cantidad || 0) < 5 ? 'Stock bajo' : 'Normal'
     ]);
-
     doc.autoTable({
         head: [columnas],
         body: filas,
@@ -263,40 +235,5 @@ function exportarPDF() {
         headStyles: { fillColor: [31, 111, 194] },
         alternateRowStyles: { fillColor: [245, 245, 245] }
     });
-
     doc.save('inventario_productos.pdf');
-}
-
-
-// al crear producto — después del if (success)
-if (productoId) {
-    success = await actualizarProducto(productoId, producto);
-    if (success) {
-        await registrarHistorial('editar', producto.nombre, 
-            `Cantidad: ${producto.cantidad} | Precio: $${producto.precio}`);
-        alert('Producto actualizado');
-    }
-} else {
-    success = await crearProducto(producto);
-    if (success) {
-        await registrarHistorial('crear', producto.nombre, 
-            `Cantidad: ${producto.cantidad} | Precio: $${producto.precio}`);
-        alert('Producto creado');
-    }
-}
-
-// al eliminar producto — en borrarProducto()
-async function borrarProducto(id) {
-    if (!confirm('¿Estás seguro de eliminar este producto?')) return;
-    
-    const producto = productosGlobal.find(p => p.id === id);
-    const success = await eliminarProducto(id);
-    if (success) {
-        await registrarHistorial('eliminar', producto?.nombre || 'Producto', 
-            `ID: ${id}`);
-        alert('Producto eliminado');
-        await cargarProductos();
-    } else {
-        alert('Error al eliminar');
-    }
 }

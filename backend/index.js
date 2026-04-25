@@ -251,7 +251,7 @@ app.post('/categorias', (req, res) => {
     const { nombre, descripcion } = req.body;
     if (!nombre) return res.status(400).send('El nombre es requerido');
 
-    // ✅ INSERT a tabla categorias, no productos
+    // INSERT a tabla categorias, no productos
     const sql = 'INSERT INTO categorias (nombre, descripcion, usuario_id) VALUES (?, ?, ?)';
 
     db.query(sql, [nombre, descripcion || null, req.session.usuario.id], (err, result) => {
@@ -262,7 +262,7 @@ app.post('/categorias', (req, res) => {
 
 app.put('/categorias/:id', (req, res) => {
     if (!req.session.usuario) return res.status(401).send('No autorizado');
-    // ✅ Solo nombre y descripcion, no campos de productos
+    //Solo nombre y descripcion, no campos de productos
     const { nombre, descripcion } = req.body;
     const sql = 'UPDATE categorias SET nombre=?, descripcion=? WHERE id=? AND usuario_id=?';
     db.query(sql, [nombre, descripcion, req.params.id, req.session.usuario.id], (err, result) => {
@@ -279,6 +279,85 @@ app.delete('/categorias/:id', (req, res) => {
         if (err) return res.status(500).send(err.message);
         if (result.affectedRows === 0) return res.status(404).send('No encontrada');
         res.send('Categoría eliminada');
+    });
+});
+
+
+// ============ RUTAS DE ADMIN ============
+
+app.get('/admin/usuarios', (req, res) => {
+    if (!req.session.usuario) return res.status(401).send('No autorizado');
+    if (req.session.usuario.rol !== 'admin') return res.status(403).send('Acceso denegado');
+
+    const sql = 'SELECT id, nombre, email, rol FROM usuarios ORDER BY id ASC';
+    db.query(sql, (err, results) => {
+        if (err) return res.status(500).send(err.message);
+        res.json(results);
+    });
+});
+
+app.put('/admin/usuarios/:id', (req, res) => {
+    if (!req.session.usuario) return res.status(401).send('No autorizado');
+    if (req.session.usuario.rol !== 'admin') return res.status(403).send('Acceso denegado');
+
+    const { rol } = req.body;
+    const sql = 'UPDATE usuarios SET rol = ? WHERE id = ?';
+    db.query(sql, [rol, req.params.id], (err, result) => {
+        if (err) return res.status(500).send(err.message);
+        res.send('Rol actualizado');
+    });
+});
+
+app.delete('/admin/usuarios/:id', (req, res) => {
+    if (!req.session.usuario) return res.status(401).send('No autorizado');
+    if (req.session.usuario.rol !== 'admin') return res.status(403).send('Acceso denegado');
+    if (req.params.id == req.session.usuario.id) return res.status(400).send('No puedes eliminarte a ti mismo');
+
+    const sql = 'DELETE FROM usuarios WHERE id = ?';
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) return res.status(500).send(err.message);
+        res.send('Usuario eliminado');
+    });
+});
+
+// ============ RUTAS DE HISTORIAL ============
+
+app.get('/historial', (req, res) => {
+    if (!req.session.usuario) return res.status(401).send('No autorizado');
+
+    const sql = `SELECT * FROM historial WHERE usuario_id = ? ORDER BY fecha DESC LIMIT 100`;
+    db.query(sql, [req.session.usuario.id], (err, results) => {
+        if (err) return res.status(500).send(err.message);
+        res.json(results);
+    });
+});
+
+app.get('/admin/historial', (req, res) => {
+    if (!req.session.usuario) return res.status(401).send('No autorizado');
+    if (req.session.usuario.rol !== 'admin') return res.status(403).send('Acceso denegado');
+
+    const sql = `SELECT * FROM historial ORDER BY fecha DESC LIMIT 200`;
+    db.query(sql, (err, results) => {
+        if (err) return res.status(500).send(err.message);
+        res.json(results);
+    });
+});
+
+app.post('/historial', (req, res) => {
+    if (!req.session.usuario) return res.status(401).send('No autorizado');
+
+    const { accion, producto_nombre, detalle } = req.body;
+    const sql = `INSERT INTO historial (usuario_id, usuario_nombre, accion, producto_nombre, detalle) 
+                 VALUES (?, ?, ?, ?, ?)`;
+    db.query(sql, [
+        req.session.usuario.id,
+        req.session.usuario.nombre,
+        accion,
+        producto_nombre,
+        detalle
+    ], (err, result) => {
+        if (err) return res.status(500).send(err.message);
+        res.status(201).json({ id: result.insertId });
     });
 });
 
