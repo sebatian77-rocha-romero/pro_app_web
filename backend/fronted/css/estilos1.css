@@ -83,6 +83,24 @@ h3 {
     .container-c {
         max-width: 100%;
         margin: 10px;
+        padding: 10px;
+    }
+
+    .tabla-container {
+        padding: 10px;
+    }
+
+    .form-container {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .export-buttons {
+        flex-direction: column;
+    }
+
+    .export-buttons button {
+        width: 100%;
     }
 }
 
@@ -339,12 +357,13 @@ img {
     height: auto;
     box-sizing: border-box;
     background: #242424;
-    padding: 25px;
+    padding: 15px;
     border-radius: 15px;
     display: flex;
     align-items: center;
     flex-direction: column;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    overflow-x: hidden;
 }
 
 
@@ -422,6 +441,8 @@ img {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    overflow-x: auto; /* permite scroll horizontal solo en la tabla */
+    box-sizing: border-box;
 }
 
 #categoriasTable {
@@ -571,6 +592,7 @@ img {
 .tabla {
     width: 100%;
     border-collapse: collapse;
+    min-width: 500px; /*fuerza ancho mínimo para que no se comprima */
 }
 
 textarea {
@@ -666,13 +688,12 @@ p {
 
 .estadisticas {
     width: 100%;
-    max-width: 600px;
+    max-width: 100%;
     background: #242424;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
     margin-top: 30px;
-    margin-left: 0;
     box-sizing: border-box;
 }
 
@@ -746,21 +767,31 @@ p {
 
 .alert-section {
     margin-top: 30px;
-    background: #ff6b6b;
+    background: #c0392b;
     padding: 15px;
     border-radius: 10px;
     color: #fff;
     display: flex;
-    align-items: center;
+    flex-direction: column; /* apila en móvil */
     gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
+
 .alert-list {
-    margin-top: 30px;
-    background: #1A1A1A;
-    padding: 20px;  
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    margin-top: 0;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+    word-break: break-word;
+}
+
+.alert-item {
+    padding: 5px 0;
+    color: #fff;
+    word-break: break-word;
 }
 
 .recent-section {
@@ -769,6 +800,16 @@ p {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+.recent-item {
+    background: #1A1A1A !important;
+    border-left: 4px solid #27ae60;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    color: #ECECEC;
+    word-break: break-word;
 }
 
 .recent-list {
