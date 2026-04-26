@@ -28,9 +28,9 @@ function mostrarCategorias(categorias) {
         return;
     }
 
-    tbody.innerHTML = categorias.map(c => `
+    tbody.innerHTML = categorias.map((c, index) => `
         <tr>
-            <td>${c.id}</td>
+            <td>${index + 1}</td>
             <td><strong>${escapeHtml(c.nombre)}</strong></td>
             <td>${escapeHtml(c.descripcion || '-')}</td>
             <td><span>${c.total_productos || 0} producto(s)</span></td>
@@ -57,7 +57,7 @@ function configurarFormulario() {
             const categoriaId = document.getElementById('categoriaId').value;
 
             if (!nombre) {
-                alert('❌ El nombre es requerido');
+                alert('El nombre es requerido');
                 return;
             }
 
@@ -66,18 +66,18 @@ function configurarFormulario() {
             if (categoriaId) {
                 // Actualizar en backend
                 success = await actualizarCategoria(categoriaId, { nombre, descripcion });
-                if (success) alert('✅ Categoría actualizada');
+                if (success) alert('Categoría actualizada');
             } else {
                 // Crear en backend
                 success = await crearCategoria({ nombre, descripcion });
-                if (success) alert('✅ Categoría creada');
+                if (success) alert('Categoría creada');
             }
 
             if (success) {
                 limpiarFormulario();
                 await cargarCategorias();
             } else {
-                alert('❌ Error al guardar la categoría');
+                alert('Error al guardar la categoría');
             }
         });
     }
@@ -111,10 +111,10 @@ async function borrarCategoria(id) {
 
     const success = await eliminarCategoria(id);
     if (success) {
-        alert('✅ Categoría eliminada');
+        alert('Categoría eliminada');
         await cargarCategorias();
     } else {
-        alert('❌ Error al eliminar. Puede que tenga productos asociados.');
+        alert('Error al eliminar. Puede que tenga productos asociados.');
     }
 }
 

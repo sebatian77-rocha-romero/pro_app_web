@@ -28,12 +28,12 @@ async function cargarNombreUsuario() {
 
 async function cargarEstadisticas() {
     const productos = await obtenerProductos();
+    const categorias = await obtenerCategorias(); // ← agregar esta línea
     productosGlobal = productos;
     
     const total = productos.length;
     const valorTotal = productos.reduce((sum, p) => sum + ((p.cantidad||0) * parseFloat(p.precio||0)), 0);
     const bajoStock = productos.filter(p => (p.cantidad||0) < 5).length;
-    const categoriasUnicas = [...new Set(productos.map(p => p.categoria).filter(c => c))];
     
     const totalElem = document.getElementById('totalProductos');
     const valorElem = document.getElementById('valorInventario');
@@ -43,7 +43,7 @@ async function cargarEstadisticas() {
     if (totalElem) totalElem.textContent = total;
     if (valorElem) valorElem.textContent = `$${valorTotal.toFixed(2)}`;
     if (stockElem) stockElem.textContent = bajoStock;
-    if (categoriasElem) categoriasElem.textContent = categoriasUnicas.length;
+    if (categoriasElem) categoriasElem.textContent = categorias.length; // ← usar categorias reales
 }
 
 async function cargarStockBajo() {
