@@ -66,13 +66,13 @@ h3 {
 }
 
 /* estilo adaptativvo para celulares */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .container-index {
         padding: 10px 15px;
     }
 
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px;
     }
 
@@ -483,11 +483,11 @@ img {
 }
 
 .perfil-avatar {
+    width: 100%;
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 55px;
 }
 
 .avatar {
@@ -500,7 +500,6 @@ img {
     align-items: center;
     font-size: 40px;
     color: #fff;
-    margin-left: 200px;
 }
 
 .perfil-info p {
