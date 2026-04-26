@@ -41,9 +41,9 @@ function mostrarUsuarios(usuarios) {
         return;
     }
 
-    tbody.innerHTML = usuarios.map(u => `
+    tbody.innerHTML = usuarios.map((u, index) => `
         <tr>
-            <td>${u.id}</td>
+            <td>${index + 1}</td>
             <td>${escapeHtml(u.nombre)}</td>
             <td>${escapeHtml(u.email)}</td>
             <td>
