@@ -9,6 +9,7 @@ body {
     font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
+
 .wrapper {
     background: #1A1A1A;
     padding: 40px;
@@ -206,6 +207,7 @@ img {
     justify-content: flex-start;
     min-height: 100vh;
     font-family: 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
 }
 
 .container-index {
@@ -1017,6 +1019,53 @@ p {
     font-weight: bold;
 }
 
-input[type="file"] {
-    display: none;
+/* Labels */
+.form-group label {
+    color: #ECECEC;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* Inputs de texto dentro de formularios */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background: #121212;
+    border: 1px solid #333;
+    border-radius: 12px;
+    color: #ECECEC;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    outline: none;
+}
+
+/* Focus — borde verde al escribir */
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2be8a0;
+}
+
+/* Placeholder */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #555;
+}
+
+/* Select — quitar flecha nativa y poner color */
+.form-group select {
+    appearance: none;
+    cursor: pointer;
+}
+
+/* Textarea — solo redimensionable verticalmente */
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
 }
