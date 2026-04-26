@@ -1019,7 +1019,7 @@ p {
     font-weight: bold;
 }
 
-/* Labels */
+/* labels */
 .form-group label {
     color: #ECECEC;
     font-size: 14px;
@@ -1027,7 +1027,7 @@ p {
     margin-bottom: 4px;
 }
 
-/* Inputs de texto dentro de formularios */
+/* inputs de texto dentro de formularios */
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group select,
@@ -1044,7 +1044,7 @@ p {
     outline: none;
 }
 
-/* Focus — borde verde al escribir */
+/* focus — borde verde al escribir */
 .form-group input[type="text"]:focus,
 .form-group input[type="number"]:focus,
 .form-group select:focus,
@@ -1052,19 +1052,19 @@ p {
     border-color: #2be8a0;
 }
 
-/* Placeholder */
+/* placeholder */
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     color: #555;
 }
 
-/* Select — quitar flecha nativa y poner color */
+/* select — quitar flecha nativa y poner color */
 .form-group select {
     appearance: none;
     cursor: pointer;
 }
 
-/* Textarea — solo redimensionable verticalmente */
+/* textarea — solo redimensionable verticalmente */
 .form-group textarea {
     resize: vertical;
     min-height: 80px;
