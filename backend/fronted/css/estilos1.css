@@ -1016,3 +1016,16 @@ p {
     font-size: 12px;
     font-weight: bold;
 }
+
+.nombre {
+    color: #2be8a0;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.descripcion {
+    color: #ECECEC;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
