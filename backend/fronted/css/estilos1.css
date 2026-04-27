@@ -548,7 +548,8 @@ img {
 
 
 #actu {
-    margin-left: 80px;
+    display: block;
+    margin: 0 auto;
     padding: 12px;
     background: linear-gradient(235deg, #0f0ff2, #6a00ff);
     color: #000;
@@ -558,8 +559,7 @@ img {
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(43, 140, 232, 0.5);
     text-align: center;
-    flex-direction: column;
-    margin-right: 105px;
+    width: fit-content; 
 }
 
 
